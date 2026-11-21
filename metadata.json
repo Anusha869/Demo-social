@@ -1,0 +1,6 @@
+{
+  "name": "HK Surya — Opportunity & Applicant Dashboard",
+  "description": "Live social media scanner for freelance website developer demand, paired with a project opportunity pipeline and applicant tracking dashboard for HK Surya Website Development.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
