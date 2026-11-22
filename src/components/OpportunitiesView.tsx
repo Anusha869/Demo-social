@@ -115,6 +115,7 @@ export const OpportunitiesView: React.FC<OpportunitiesViewProps> = ({
         opp.platform.toLowerCase().includes(q) ||
         (opp.industry || '').toLowerCase().includes(q) ||
         (opp.contactEmail || '').toLowerCase().includes(q) ||
+        (opp.contactPhone || '').toLowerCase().includes(q) ||
         opp.techStack.some((t) => t.toLowerCase().includes(q))
       );
     });
@@ -284,6 +285,16 @@ export const OpportunitiesView: React.FC<OpportunitiesViewProps> = ({
                             </a>
                           ) : (
                             <span>{opp.platform}</span>
+                          )}
+                          {opp.contactPhone && (
+                            <p className="truncate">
+                              <a
+                                href={`tel:${opp.contactPhone}`}
+                                className="text-emerald-700 hover:text-emerald-800 hover:underline font-mono font-medium"
+                              >
+                                {opp.contactPhone}
+                              </a>
+                            </p>
                           )}
                           {opp.contactEmail && (
                             <p className="truncate">
@@ -526,9 +537,10 @@ export const OpportunitiesView: React.FC<OpportunitiesViewProps> = ({
                     }
                     className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg bg-white"
                   >
-                    <option value="Full-Stack Web Dev">Full-Stack Web Dev</option>
+                    <option value="Website Dev + SEO">Website Dev + SEO</option>
                     <option value="Website Development">Website Development</option>
                     <option value="SEO">SEO</option>
+                    <option value="Full-Stack Web Dev">Full-Stack Web Dev</option>
                     <option value="AEO">AEO (Answer Engine Opt.)</option>
                     <option value="Digital Marketing">Digital Marketing</option>
                   </select>

@@ -73,6 +73,15 @@ export const LoginView: React.FC<LoginViewProps> = ({
         return;
       }
 
+      if (res.status === 409 && !isSetupMode) {
+        setForceLoginView(false);
+        await onRefreshStatus();
+        setInfoNotice(
+          'No admin credentials are saved yet. Click Save & Sign In below to save this username and password.'
+        );
+        return;
+      }
+
       if (!res.ok) {
         throw new Error(data.error || 'Sign in failed.');
       }

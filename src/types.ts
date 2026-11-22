@@ -1,4 +1,8 @@
 export type SocialPlatform =
+  | 'Himalayas'
+  | 'RemoteOK'
+  | 'Jobicy'
+  | 'Arbeitnow'
   | 'Reddit'
   | 'Hacker News'
   | 'Mastodon'
@@ -12,9 +16,10 @@ export type SocialPlatform =
   | 'Web Community';
 
 export type ServiceCategory =
-  | 'Full-Stack Web Dev'
+  | 'Website Dev + SEO'
   | 'Website Development'
   | 'SEO'
+  | 'Full-Stack Web Dev'
   | 'AEO'
   | 'Digital Marketing';
 
@@ -102,6 +107,10 @@ export interface SocialScanMeta {
   totalFetched: number;
   confirmedFreelanceNeeds: number;
   sources: {
+    himalayas: SourceStatus;
+    remoteOk: SourceStatus;
+    jobicy: SourceStatus;
+    arbeitnow: SourceStatus;
     remotive: SourceStatus;
     devTo: SourceStatus;
     mastodon: SourceStatus;
@@ -182,6 +191,7 @@ export interface PostVerificationResult {
   clientOrAuthor: string;
   authorProfileUrl: string;
   contactEmail: string;
+  contactPhone: string;
   websiteUrl: string;
   socialLinks: string[];
   platformGuess: SocialPlatform;

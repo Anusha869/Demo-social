@@ -56,7 +56,7 @@ export const OpportunityModal: React.FC<OpportunityModalProps> = ({
   const [clientHandle, setClientHandle] = React.useState('');
   const [platform, setPlatform] = React.useState('LinkedIn');
   const [serviceCategory, setServiceCategory] =
-    React.useState<ServiceCategory>('Full-Stack Web Dev');
+    React.useState<ServiceCategory>('Website Dev + SEO');
   const [industry, setIndustry] = React.useState('SaaS & Software');
   const [sourceUrl, setSourceUrl] = React.useState('');
   const [authorProfileUrl, setAuthorProfileUrl] = React.useState('');
@@ -206,9 +206,10 @@ export const OpportunityModal: React.FC<OpportunityModalProps> = ({
                 onChange={(e) => setServiceCategory(e.target.value as ServiceCategory)}
                 className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg bg-white focus:outline-none focus:border-sky-600"
               >
-                <option value="Full-Stack Web Dev">Full-Stack Web Dev</option>
+                <option value="Website Dev + SEO">Website Dev + SEO</option>
                 <option value="Website Development">Website Development</option>
                 <option value="SEO">SEO</option>
+                <option value="Full-Stack Web Dev">Full-Stack Web Dev</option>
                 <option value="AEO">AEO (Answer Engine Opt.)</option>
                 <option value="Digital Marketing">Digital Marketing</option>
               </select>
@@ -238,6 +239,10 @@ export const OpportunityModal: React.FC<OpportunityModalProps> = ({
                 onChange={(e) => setPlatform(e.target.value)}
                 className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg bg-white focus:outline-none focus:border-sky-600"
               >
+                <option value="Himalayas">Himalayas</option>
+                <option value="RemoteOK">RemoteOK</option>
+                <option value="Jobicy">Jobicy</option>
+                <option value="Arbeitnow">Arbeitnow</option>
                 <option value="LinkedIn">LinkedIn</option>
                 <option value="X (Twitter)">X (Twitter)</option>
                 <option value="Mastodon">Mastodon</option>

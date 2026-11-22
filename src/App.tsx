@@ -53,7 +53,7 @@ export default function App() {
   const [scanError, setScanError] = React.useState<string | null>(null);
   const [scanQuery, setScanQuery] = React.useState('');
   const [platformFilter, setPlatformFilter] = React.useState('All Platforms');
-  const [serviceFilter, setServiceFilter] = React.useState('All Services');
+  const [serviceFilter, setServiceFilter] = React.useState('Website Dev + SEO');
   const [industryFilter, setIndustryFilter] = React.useState('All Industries');
 
   const [selectedOpportunityId, setSelectedOpportunityId] = React.useState<string | null>(null);
@@ -187,7 +187,7 @@ export default function App() {
   React.useEffect(() => {
     if (!authToken) return;
     void loadWorkspace();
-    void runSocialScan('', 'All Platforms', 'All Services', 'All Industries');
+    void runSocialScan('', 'All Platforms', 'Website Dev + SEO', 'All Industries');
   }, [authToken, loadWorkspace, runSocialScan]);
 
   const handleAuthenticated = (session: AuthSessionResponse) => {
@@ -279,7 +279,7 @@ export default function App() {
         sourceUrl: result.sourceUrl,
         authorProfileUrl: result.authorProfileUrl,
         contactEmail: result.contactEmail,
-        contactPhone: '',
+        contactPhone: result.contactPhone || '',
         websiteUrl: result.websiteUrl,
         socialLinks: result.socialLinks,
         budget: result.budgetExtracted,

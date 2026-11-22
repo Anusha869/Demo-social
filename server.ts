@@ -42,9 +42,10 @@ const VALID_STAGES: OpportunityStage[] = [
 const VALID_PRIORITIES: OpportunityPriority[] = ['High', 'Medium', 'Low'];
 
 const VALID_SERVICES: ServiceCategory[] = [
-  'Full-Stack Web Dev',
+  'Website Dev + SEO',
   'Website Development',
   'SEO',
+  'Full-Stack Web Dev',
   'AEO',
   'Digital Marketing',
 ];
@@ -230,7 +231,7 @@ async function startServer(): Promise<void> {
     try {
       const query = cleanStr(req.query.query, 120);
       const platform = cleanStr(req.query.platform, 40) || 'All Platforms';
-      const service = cleanStr(req.query.service, 40) || 'All Services';
+      const service = cleanStr(req.query.service, 40) || 'Website Dev + SEO';
       const industry = cleanStr(req.query.industry, 60) || 'All Industries';
       const result = await runSocialMediaScan(query, platform, service, industry);
       res.json(result);

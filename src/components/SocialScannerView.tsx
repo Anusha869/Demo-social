@@ -51,10 +51,14 @@ interface SocialScannerViewProps {
 
 const PLATFORMS = [
   'All Platforms',
-  'Mastodon',
+  'Himalayas',
+  'RemoteOK',
+  'Jobicy',
+  'Arbeitnow',
   'Remotive',
-  'Dev.to',
+  'Mastodon',
   'Hacker News',
+  'Dev.to',
   'Reddit',
   'X (Twitter)',
   'LinkedIn',
@@ -63,12 +67,10 @@ const PLATFORMS = [
 ];
 
 const SERVICES = [
-  'All Services',
-  'Full-Stack Web Dev',
+  'Website Dev + SEO',
   'Website Development',
   'SEO',
-  'AEO',
-  'Digital Marketing',
+  'All Web + SEO',
 ];
 
 const INDUSTRIES: IndustryCategory[] = [
@@ -167,10 +169,10 @@ export const SocialScannerView: React.FC<SocialScannerViewProps> = ({
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div className="space-y-1">
             <h2 className="font-display text-lg font-semibold text-slate-900">
-              Recently Added Posts — All Social Platforms &amp; Industries
+              Website Developer + SEO Leads — Live Platforms &amp; Contact Extraction
             </h2>
             <p className="text-sm text-slate-600">
-              Select an industry to fetch recent freelance Full-Stack Web Dev, Website Development, SEO, AEO, and Digital Marketing posts with extracted original contact details and social links.
+              Fetches live Website Developer + SEO projects across public APIs and industries with verified company websites, emails, social links, and extracted contact phone numbers.
             </p>
           </div>
           <button
@@ -190,7 +192,7 @@ export const SocialScannerView: React.FC<SocialScannerViewProps> = ({
               type="text"
               value={query}
               onChange={(e) => onQueryChange(e.target.value)}
-              placeholder="Keyword filter (e.g., Full-Stack, Next.js, Technical SEO, AEO, Shopify)"
+              placeholder="Keyword filter (e.g., WordPress, Shopify, Technical SEO, Webflow, Next.js)"
               className="w-full pl-10 pr-4 py-2.5 text-sm bg-white border border-slate-300 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-sky-600 focus:ring-1 focus:ring-sky-600"
             />
           </div>
@@ -293,9 +295,10 @@ export const SocialScannerView: React.FC<SocialScannerViewProps> = ({
 
             {meta && (
               <p className="text-xs text-slate-500 font-mono tabular-nums">
-                Mastodon: {meta.sources.mastodon.count} · Remotive: {meta.sources.remotive.count} ·
-                Dev.to: {meta.sources.devTo.count} · HN: {meta.sources.hackerNews.count} · Reddit:{' '}
-                {meta.sources.reddit.count} · Search: {meta.sources.searchGrounded.count}
+                Himalayas: {meta.sources.himalayas.count} · Jobicy: {meta.sources.jobicy.count} ·
+                Arbeitnow: {meta.sources.arbeitnow.count} · Remotive: {meta.sources.remotive.count} ·
+                RemoteOK: {meta.sources.remoteOk.count} · Mastodon: {meta.sources.mastodon.count} ·
+                HN: {meta.sources.hackerNews.count} · Search: {meta.sources.searchGrounded.count}
               </p>
             )}
           </div>
@@ -376,6 +379,15 @@ export const SocialScannerView: React.FC<SocialScannerViewProps> = ({
                 {verifyResult.techStack.join(', ') || verifyResult.serviceCategory}
               </p>
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-600">
+                {verifyResult.contactPhone && (
+                  <a
+                    href={`tel:${verifyResult.contactPhone}`}
+                    className="inline-flex items-center gap-1 text-emerald-700 hover:underline font-mono font-medium"
+                  >
+                    <Phone className="h-3.5 w-3.5" />
+                    <span>{verifyResult.contactPhone}</span>
+                  </a>
+                )}
                 {verifyResult.contactEmail && (
                   <a
                     href={`mailto:${verifyResult.contactEmail}`}
@@ -467,20 +479,20 @@ export const SocialScannerView: React.FC<SocialScannerViewProps> = ({
               No matching recent posts found for {industryFilter} on {platformFilter}.
             </p>
             <p className="text-xs text-slate-500 max-w-md mx-auto">
-              Switch to All Industries or All Platforms to fetch the latest freelance Full-Stack Web Dev, Website Development, SEO, AEO, and Digital Marketing posts.
+              Switch to All Web + SEO, All Industries, or All Platforms to fetch the latest live Website Developer and SEO opportunities.
             </p>
             <button
               type="button"
               onClick={() => {
                 onQueryChange('');
                 onPlatformChange('All Platforms');
-                onServiceChange('All Services');
+                onServiceChange('Website Dev + SEO');
                 onIndustryChange('All Industries');
-                onRunScan('', 'All Platforms', 'All Services', 'All Industries');
+                onRunScan('', 'All Platforms', 'Website Dev + SEO', 'All Industries');
               }}
               className="px-4 py-2 text-xs font-medium text-white bg-[#0B1A33] hover:bg-slate-800 rounded-lg"
             >
-              Reset &amp; Fetch All Industries
+              Reset &amp; Fetch Website Dev + SEO
             </button>
           </div>
         ) : (
@@ -574,6 +586,21 @@ export const SocialScannerView: React.FC<SocialScannerViewProps> = ({
                         </a>
                       )}
 
+                      {lead.contactPhone ? (
+                        <a
+                          href={`tel:${lead.contactPhone}`}
+                          className="inline-flex items-center gap-1 text-emerald-700 hover:underline font-mono font-medium"
+                        >
+                          <Phone className="h-3.5 w-3.5" />
+                          <span>{lead.contactPhone}</span>
+                        </a>
+                      ) : (
+                        <span className="inline-flex items-center gap-1 text-slate-400">
+                          <Phone className="h-3.5 w-3.5" />
+                          <span>Phone not listed</span>
+                        </span>
+                      )}
+
                       {lead.contactEmail ? (
                         <a
                           href={`mailto:${lead.contactEmail}`}
@@ -585,18 +612,8 @@ export const SocialScannerView: React.FC<SocialScannerViewProps> = ({
                       ) : (
                         <span className="inline-flex items-center gap-1 text-slate-400">
                           <Mail className="h-3.5 w-3.5" />
-                          <span>Email not listed in post</span>
+                          <span>Email not listed</span>
                         </span>
-                      )}
-
-                      {lead.contactPhone && (
-                        <a
-                          href={`tel:${lead.contactPhone}`}
-                          className="inline-flex items-center gap-1 text-emerald-700 hover:underline font-mono"
-                        >
-                          <Phone className="h-3.5 w-3.5" />
-                          <span>{lead.contactPhone}</span>
-                        </a>
                       )}
 
                       {lead.websiteUrl && (

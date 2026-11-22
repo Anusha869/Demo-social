@@ -78,10 +78,10 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
   const trackedUrls = new Set(opportunities.map((o) => o.sourceUrl).filter(Boolean));
 
   const serviceBreakdown = [
-    { label: 'Full-Stack Web Dev', count: opportunities.filter((o) => o.serviceCategory === 'Full-Stack Web Dev').length },
+    { label: 'Website Dev + SEO', count: opportunities.filter((o) => o.serviceCategory === 'Website Dev + SEO').length },
     { label: 'Website Dev', count: opportunities.filter((o) => o.serviceCategory === 'Website Development').length },
     { label: 'SEO', count: opportunities.filter((o) => o.serviceCategory === 'SEO').length },
-    { label: 'AEO', count: opportunities.filter((o) => o.serviceCategory === 'AEO').length },
+    { label: 'Full-Stack Web Dev', count: opportunities.filter((o) => o.serviceCategory === 'Full-Stack Web Dev').length },
   ];
 
   return (
@@ -105,7 +105,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
           <p className="text-xs text-slate-500">
             {scanMeta
               ? `Fetched ${formatRelativeTime(scanMeta.scannedAt)}`
-              : 'Web Dev, Full-Stack, SEO & AEO'}
+              : 'Website Dev + SEO Leads'}
           </p>
         </div>
 
@@ -212,10 +212,10 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
           <div className="flex items-center justify-between gap-4 px-5 py-4 border-b border-slate-200">
             <div>
               <h2 className="font-display text-base font-semibold text-slate-900">
-                Recently Added Freelance Posts
+                Website Developer + SEO Leads
               </h2>
               <p className="text-xs text-slate-500 mt-0.5">
-                Newest Full-Stack, Website Dev, SEO &amp; AEO posts from APIs
+                Newest Website Dev + SEO posts with extracted contact numbers
               </p>
             </div>
             <button
@@ -280,6 +280,7 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
                       <span className="truncate">
                         <strong className="font-medium text-sky-800">{lead.serviceCategory}</strong> ·{' '}
                         {lead.industry} · {lead.platform} · {formatRelativeTime(lead.postedAt)}
+                        {lead.contactPhone ? ` · ${lead.contactPhone}` : ''}
                         {lead.contactEmail ? ` · ${lead.contactEmail}` : ''}
                       </span>
                       {alreadyTracked ? (
